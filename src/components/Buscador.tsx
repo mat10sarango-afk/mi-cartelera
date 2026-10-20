@@ -1,5 +1,6 @@
 import { useState, type SyntheticEvent } from 'react';
 import { buscarTitulos } from '../lib/tmdb';
+import { agregarALista } from '../lib/lista';
 import type { ResultadoBusqueda } from '../types';
 
 export default function Buscador() {
@@ -8,6 +9,7 @@ export default function Buscador() {
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [buscado, setBuscado] = useState(false);
+  const [mensajes, setMensajes] = useState<Record<string, string>>({});
 
   const manejarEnvio = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,6 +17,7 @@ export default function Buscador() {
 
     setCargando(true);
     setError(null);
+    setMensajes({});
     try {
       setResultados(await buscarTitulos(consulta.trim()));
       setBuscado(true);
@@ -23,6 +26,18 @@ export default function Buscador() {
       setResultados([]);
     } finally {
       setCargando(false);
+    }
+  };
+
+  const manejarAgregar = async (r: ResultadoBusqueda) => {
+    const clave = `${r.tipo_contenido}-${r.tmdb_id}`;
+    setMensajes((prev) => ({ ...prev, [clave]: 'Agregando...' }));
+    try {
+      await agregarALista(r);
+      setMensajes((prev) => ({ ...prev, [clave]: '✓ Agregado a tu lista' }));
+    } catch (err) {
+      const texto = err instanceof Error ? err.message : 'No se pudo agregar.';
+      setMensajes((prev) => ({ ...prev, [clave]: texto }));
     }
   };
 
@@ -47,19 +62,24 @@ export default function Buscador() {
       )}
 
       <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '1rem', listStyle: 'none', padding: 0 }}>
-        {resultados.map((r) => (
-          <li key={`${r.tipo_contenido}-${r.tmdb_id}`}>
-            {r.poster_url ? (
-              <img src={r.poster_url} alt={`Póster de ${r.titulo}`} style={{ width: '100%' }} />
-            ) : (
-              <div style={{ height: 240, background: '#444' }}>Sin póster</div>
-            )}
-            <strong>{r.titulo}</strong>
-            <div>
-              {r.anio} · {r.tipo_contenido}
-            </div>
-          </li>
-        ))}
+        {resultados.map((r) => {
+          const clave = `${r.tipo_contenido}-${r.tmdb_id}`;
+          return (
+            <li key={clave}>
+              {r.poster_url ? (
+                <img src={r.poster_url} alt={`Póster de ${r.titulo}`} style={{ width: '100%' }} />
+              ) : (
+                <div style={{ height: 240, background: '#444' }}>Sin póster</div>
+              )}
+              <strong>{r.titulo}</strong>
+              <div>
+                {r.anio} · {r.tipo_contenido}
+              </div>
+              <button onClick={() => manejarAgregar(r)}>Agregar a mi lista</button>
+              {mensajes[clave] && <div>{mensajes[clave]}</div>}
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
