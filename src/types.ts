@@ -13,3 +13,11 @@ export interface ItemLista {
   comentario: string | null;
   fecha_agregado: string;
 }
+export interface ResultadoBusqueda {
+  tmdb_id: number;
+  tipo_contenido: TipoContenido;
+  titulo: string;
+  poster_url: string | null;
+  anio: string;
+  sinopsis: string;
+}
