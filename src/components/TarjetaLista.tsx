@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { Estado, ItemLista } from '../types';
 
 interface Props {
@@ -23,13 +23,23 @@ export default function TarjetaLista({ item, onActualizar, onEliminar }: Props) 
   return (
     <li>
       <Link to={`/titulo/${item.id}`}>
-  {item.poster_url ? (
-    <img src={item.poster_url} alt={`Póster de ${item.titulo}`} style={{ width: '100%' }} />
-  ) : (
-    <div style={{ height: 240, background: '#444' }}>Sin póster</div>
-  )}
-  <strong>{item.titulo}</strong>
-</Link>
+        {item.poster_url ? (
+          <img src={item.poster_url} alt={`Póster de ${item.titulo}`} />
+        ) : (
+          <div
+            style={{
+              aspectRatio: '2 / 3',
+              background: '#444',
+              display: 'grid',
+              placeItems: 'center',
+              borderRadius: 6,
+            }}
+          >
+            Sin póster
+          </div>
+        )}
+        <strong>{item.titulo}</strong>
+      </Link>
       <div>{item.tipo_contenido}</div>
 
       <label>
@@ -80,7 +90,9 @@ export default function TarjetaLista({ item, onActualizar, onEliminar }: Props) 
         Guardar comentario
       </button>
 
-      <button onClick={() => onEliminar(item.id)}>Eliminar</button>
+      <button className="peligro" onClick={() => onEliminar(item.id)}>
+        Eliminar
+      </button>
     </li>
   );
 }

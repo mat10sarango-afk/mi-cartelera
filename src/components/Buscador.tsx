@@ -49,6 +49,7 @@ export default function Buscador() {
           placeholder="Busca una película o serie"
           value={consulta}
           onChange={(e) => setConsulta(e.target.value)}
+          style={{ flex: 1, minWidth: 220 }}
         />
         <button type="submit" disabled={cargando}>
           Buscar
@@ -61,15 +62,25 @@ export default function Buscador() {
         <p>No se encontraron resultados.</p>
       )}
 
-      <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '1rem', listStyle: 'none', padding: 0 }}>
+      <ul className="cuadricula">
         {resultados.map((r) => {
           const clave = `${r.tipo_contenido}-${r.tmdb_id}`;
           return (
             <li key={clave}>
               {r.poster_url ? (
-                <img src={r.poster_url} alt={`Póster de ${r.titulo}`} style={{ width: '100%' }} />
+                <img src={r.poster_url} alt={`Póster de ${r.titulo}`} />
               ) : (
-                <div style={{ height: 240, background: '#444' }}>Sin póster</div>
+                <div
+                  style={{
+                    aspectRatio: '2 / 3',
+                    background: '#444',
+                    display: 'grid',
+                    placeItems: 'center',
+                    borderRadius: 6,
+                  }}
+                >
+                  Sin póster
+                </div>
               )}
               <strong>{r.titulo}</strong>
               <div>
