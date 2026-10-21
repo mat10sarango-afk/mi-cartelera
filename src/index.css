@@ -171,3 +171,5 @@ footer {
 .pestana.activa { background: var(--acento); color: #111; border-color: var(--acento); }
 .explorar-barra { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
 .explorar-mas { display: block; margin: 0 auto 2rem; }
+
+header nav strong { color: var(--acento); letter-spacing: 0.02em; }

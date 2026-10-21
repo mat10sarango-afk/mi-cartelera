@@ -1,4 +1,4 @@
-# Mi Cartelera Personal
+# GoldenMovies
 
 Aplicación web donde cada usuario registra, organiza y califica las películas y series que quiere ver, está viendo o ya vio. Busca títulos reales en la API de [TMDB](https://www.themoviedb.org) y guarda su colección personal en una base de datos de Supabase, protegida por autenticación y políticas RLS.
 
@@ -29,7 +29,7 @@ Aplicación web donde cada usuario registra, organiza y califica las películas 
 1. Clona el repositorio e instala las dependencias:
 
 ```bash
-   git clone https://github.com/TU_USUARIO/mi-cartelera.git
+   git clone https://github.com/mat10sarango-afk/mi-cartelera.git
    cd mi-cartelera
    npm install
 ```

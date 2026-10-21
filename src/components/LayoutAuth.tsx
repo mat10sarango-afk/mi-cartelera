@@ -14,8 +14,7 @@ export default function LayoutAuth({ titulo, subtitulo, children }: Props) {
           <div className="auth-logo" aria-hidden="true">
             🎬
           </div>
-          <span className="auth-nombre">Mi Cartelera Personal</span>
-          <h1>{titulo}</h1>
+            <span className="auth-nombre">GoldenMovies</span>          <h1>{titulo}</h1>
           <p>{subtitulo}</p>
         </div>
 

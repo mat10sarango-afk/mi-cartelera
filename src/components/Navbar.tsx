@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
       <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <strong>Mi Cartelera Personal</strong>
+        <strong>🎬 GoldenMovies</strong>
         <NavLink to="/">Buscar</NavLink>
         <NavLink to="/mi-lista">Mi lista</NavLink>
       </nav>
