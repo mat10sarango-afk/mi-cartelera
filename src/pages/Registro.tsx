@@ -2,6 +2,7 @@ import { useState, type SyntheticEvent } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/useAuth';
+import LayoutAuth from '../components/LayoutAuth';
 
 export default function Registro() {
   const { session, cargando } = useAuth();
@@ -28,33 +29,43 @@ export default function Registro() {
   };
 
   return (
-    <main>
-      <h1>Crear cuenta</h1>
+    <LayoutAuth
+      titulo="Crea tu cuenta"
+      subtitulo="Guarda las películas y series que quieres ver"
+    >
       <form onSubmit={manejarEnvio}>
-        <input
-          type="email"
-          placeholder="Correo"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña (mínimo 6 caracteres)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          minLength={6}
-          required
-        />
+        <label>
+          Correo
+          <input
+            type="email"
+            placeholder="tucorreo@ejemplo.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+            required
+          />
+        </label>
+        <label>
+          Contraseña
+          <input
+            type="password"
+            placeholder="Mínimo 6 caracteres"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
+            minLength={6}
+            required
+          />
+        </label>
         <button type="submit" disabled={enviando}>
           {enviando ? 'Creando...' : 'Registrarme'}
         </button>
       </form>
       {error && <p role="alert">{error}</p>}
-      {mensaje && <p>{mensaje}</p>}
-      <p>
+      {mensaje && <p className="mensaje-ok">{mensaje}</p>}
+      <p className="auth-pie">
         ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
       </p>
-    </main>
+    </LayoutAuth>
   );
 }

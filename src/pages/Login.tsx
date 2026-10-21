@@ -2,6 +2,7 @@ import { useState, type SyntheticEvent } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/useAuth';
+import LayoutAuth from '../components/LayoutAuth';
 
 export default function Login() {
   const { session, cargando } = useAuth();
@@ -22,31 +23,41 @@ export default function Login() {
   };
 
   return (
-    <main>
-      <h1>Iniciar sesión</h1>
+    <LayoutAuth
+      titulo="Bienvenido de nuevo"
+      subtitulo="Inicia sesión para ver tu cartelera personal"
+    >
       <form onSubmit={manejarEnvio}>
-        <input
-          type="email"
-          placeholder="Correo"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <label>
+          Correo
+          <input
+            type="email"
+            placeholder="tucorreo@ejemplo.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+            required
+          />
+        </label>
+        <label>
+          Contraseña
+          <input
+            type="password"
+            placeholder="Tu contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            required
+          />
+        </label>
         <button type="submit" disabled={enviando}>
           {enviando ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
       {error && <p role="alert">{error}</p>}
-      <p>
+      <p className="auth-pie">
         ¿No tienes cuenta? <Link to="/registro">Regístrate</Link>
       </p>
-    </main>
+    </LayoutAuth>
   );
 }

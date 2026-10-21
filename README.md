@@ -1,75 +1,60 @@
-# React + TypeScript + Vite
+# Mi Cartelera Personal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web donde cada usuario registra, organiza y califica las películas y series que quiere ver, está viendo o ya vio. Busca títulos reales en la API de [TMDB](https://www.themoviedb.org) y guarda su colección personal en una base de datos de Supabase, protegida por autenticación y políticas RLS.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Registro, inicio y cierre de sesión con Supabase Auth.
+- Ninguna pantalla es visible sin sesión iniciada.
+- Búsqueda de películas y series en TMDB (póster, título y año), con estados de carga y error.
+- Agregar títulos a una lista personal.
+- Editar el estado (por ver, viendo, vista), la calificación personal (1 a 5) y el comentario.
+- Eliminar títulos de la lista.
+- Página de detalle con póster grande, sinopsis, géneros, elenco, calificación de TMDB y mi opinión.
+- Contador resumen, filtro por estado y orden por fecha o calificación.
+- Seguridad real con Row Level Security: cada usuario solo accede a sus propios datos.
 
-## React Compiler
+## Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Capa | Tecnología |
+| --- | --- |
+| Frontend | React + TypeScript (Vite) |
+| Rutas | React Router |
+| API externa | TMDB |
+| Autenticación | Supabase Auth |
+| Base de datos | Supabase (PostgreSQL) con RLS |
 
-## Expanding the ESLint configuration
+## Instalación
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clona el repositorio e instala las dependencias:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+   git clone https://github.com/TU_USUARIO/mi-cartelera.git
+   cd mi-cartelera
+   npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+   (Con pnpm: `pnpm install`.)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Crea un archivo `.env.local` en la raíz copiando `.env.example` y completa las variables:
 
 ```
+   VITE_SUPABASE_URL=https://TU_PROYECTO.supabase.co
+   VITE_SUPABASE_ANON_KEY=tu_clave_publica_de_supabase
+   VITE_TMDB_API_KEY=tu_api_key_de_tmdb
+```
+
+   - La URL y la clave pública de Supabase están en el panel de tu proyecto.
+   - La API key (v3) se solicita en la configuración de tu cuenta de TMDB.
+
+3. Crea la tabla y las políticas en el SQL Editor de Supabase:
+
+```sql
+   create table mi_lista (
+     id bigint generated always as identity primary key,
+     user_id uuid not null references auth.users(id) on delete cascade default auth.uid(),
+     tmdb_id integer not null,
+     titulo text not null,
+     poster_url text,
+     tipo_contenido text not null check (tipo_contenido in ('pelicula','serie')),
+     estado text not null default 'por_ver' check
