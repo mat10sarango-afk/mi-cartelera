@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import type { Estado, ItemLista } from '../types';
 
@@ -21,12 +22,14 @@ export default function TarjetaLista({ item, onActualizar, onEliminar }: Props) 
 
   return (
     <li>
-      {item.poster_url ? (
-        <img src={item.poster_url} alt={`Póster de ${item.titulo}`} style={{ width: '100%' }} />
-      ) : (
-        <div style={{ height: 240, background: '#444' }}>Sin póster</div>
-      )}
-      <strong>{item.titulo}</strong>
+      <Link to={`/titulo/${item.id}`}>
+  {item.poster_url ? (
+    <img src={item.poster_url} alt={`Póster de ${item.titulo}`} style={{ width: '100%' }} />
+  ) : (
+    <div style={{ height: 240, background: '#444' }}>Sin póster</div>
+  )}
+  <strong>{item.titulo}</strong>
+</Link>
       <div>{item.tipo_contenido}</div>
 
       <label>

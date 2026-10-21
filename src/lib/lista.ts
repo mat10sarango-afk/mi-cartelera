@@ -40,3 +40,13 @@ export async function eliminarItem(id: number): Promise<void> {
   const { error } = await supabase.from('mi_lista').delete().eq('id', id);
   if (error) throw new Error(error.message);
 }
+export async function obtenerItem(id: number): Promise<ItemLista> {
+  const { data, error } = await supabase
+    .from('mi_lista')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) throw new Error('No se encontró este título en tu lista.');
+  return data as ItemLista;
+}

@@ -21,3 +21,16 @@ export interface ResultadoBusqueda {
   anio: string;
   sinopsis: string;
 }
+export interface MiembroElenco {
+  nombre: string;
+  personaje: string;
+}
+
+export interface DetalleTMDB {
+  sinopsis: string;
+  poster_grande: string | null;
+  fecha: string;
+  generos: string[];
+  calificacion_tmdb: number;
+  elenco: MiembroElenco[];
+}
