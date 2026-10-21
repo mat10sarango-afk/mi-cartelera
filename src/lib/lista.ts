@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { ResultadoBusqueda } from '../types';
+import type { ItemLista, ResultadoBusqueda } from '../types';
 
 export async function agregarALista(titulo: ResultadoBusqueda): Promise<void> {
   const { error } = await supabase.from('mi_lista').insert({
@@ -17,4 +17,26 @@ export async function agregarALista(titulo: ResultadoBusqueda): Promise<void> {
     }
     throw new Error(error.message);
   }
+}
+export async function obtenerLista(): Promise<ItemLista[]> {
+  const { data, error } = await supabase
+    .from('mi_lista')
+    .select('*')
+    .order('fecha_agregado', { ascending: false });
+
+  if (error) throw new Error(error.message);
+  return data as ItemLista[];
+}
+
+export async function actualizarItem(
+  id: number,
+  cambios: Partial<Pick<ItemLista, 'estado' | 'calificacion_personal' | 'comentario'>>,
+): Promise<void> {
+  const { error } = await supabase.from('mi_lista').update(cambios).eq('id', id);
+  if (error) throw new Error(error.message);
+}
+
+export async function eliminarItem(id: number): Promise<void> {
+  const { error } = await supabase.from('mi_lista').delete().eq('id', id);
+  if (error) throw new Error(error.message);
 }
