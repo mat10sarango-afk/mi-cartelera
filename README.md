@@ -106,7 +106,7 @@ GoldenMovies es una aplicación web donde cada usuario registra, organiza y cali
 
 ## Enlace a la app publicada
 
-(Pendiente: se añadirá al publicar en Vercel.)
+https://goldenmovies.vercel.app
 
 ## Créditos
 
