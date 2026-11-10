@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand board · GoldenMovies</title>
+<style>
+:root{
+  --fondo:#0f1117;--superficie:#1a1d27;--borde:#2a2e3b;--texto:#e8e9ed;--texto-suave:#9aa0b0;
+  --acento:#f5b301;--peligro:#e5484d;--sobre-acento:#111111;--peligro-texto:#ff6b6b;--exito:#46c37b;--borde-control:#6b7280;
+  --radio-sm:6px;--radio-md:10px;
+  --fuente:system-ui,'Segoe UI',Roboto,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font-family:var(--fuente);line-height:1.5}
+main{max-width:1100px;margin:0 auto;padding:2rem 1rem 4rem}
+h1{font-size:1.8rem;margin:0 0 .25rem}
+h2{font-size:1.2rem;color:var(--acento);margin:2.5rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--borde)}
+h3{font-size:1rem;margin:0 0 .5rem}
+p{margin:.25rem 0 .75rem}
+.suave{color:var(--texto-suave)}
+.cifras{font-variant-numeric:tabular-nums}
+a{color:var(--acento)}
+:focus-visible{outline:2px solid var(--acento);outline-offset:2px}
+.grid{display:grid;gap:1rem}
+.g-colores{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.g-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.muestra{background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio-md);overflow:hidden}
+.muestra .color{height:64px}
+.muestra .info{padding:.75rem}
+.muestra code{font-size:.85rem}
+.muestra .info small{display:block;color:var(--texto-suave)}
+.panel{background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio-md);padding:1rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--borde);vertical-align:top}
+th{color:var(--texto-suave);font-weight:600}
+.table-scroll{overflow-x:auto}
+/* Componentes de muestra (imitan las clases de Bootstrap con los tokens) */
+.btn{font:inherit;font-weight:600;min-height:40px;padding:0 1rem;border-radius:var(--radio-sm);cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--acento);color:var(--sobre-acento)}
+.btn-sec{background:transparent;color:var(--texto);border-color:var(--borde-control)}
+.btn-peligro{background:transparent;color:var(--peligro-texto);border-color:var(--peligro)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+label{display:block;font-size:.875rem;font-weight:600;margin-bottom:.25rem}
+.campo{width:100%;min-height:40px;background:var(--fondo);color:var(--texto);border:1px solid var(--borde-control);border-radius:var(--radio-sm);padding:.5rem .7rem;font:inherit}
+.campo.foco{border-color:var(--acento);outline:2px solid var(--acento);outline-offset:2px}
+.campo.error{border-color:var(--peligro)}
+.ayuda{font-size:.875rem;color:var(--texto-suave);margin:.25rem 0 0}
+.msg-error{font-size:.875rem;color:var(--peligro-texto);margin:.25rem 0 0}
+.badge{display:inline-block;font-size:.8rem;font-weight:600;padding:.15rem .5rem;border-radius:var(--radio-sm);border:1px solid}
+.b-cabe{color:var(--exito);border-color:var(--exito)}
+.b-nocabe{color:var(--peligro-texto);border-color:var(--peligro)}
+.b-sin{color:var(--texto-suave);border-color:var(--borde-control)}
+.aviso{padding:.75rem 1rem;border-radius:var(--radio-sm);border:1px solid;font-size:.9rem;margin:0 0 .5rem}
+.a-ok{border-color:var(--exito);background:var(--superficie)}
+.a-error{border-color:var(--peligro);background:var(--superficie)}
+.a-info{border-color:var(--borde-control);background:var(--superficie)}
+.progreso{height:8px;background:var(--fondo);border:1px solid var(--borde);border-radius:var(--radio-sm);overflow:hidden}
+.progreso>div{height:100%;background:var(--acento)}
+.spinner{width:1.5rem;height:1.5rem;border:3px solid var(--borde);border-top-color:var(--acento);border-radius:50%;animation:giro .8s linear infinite;display:inline-block}
+@keyframes giro{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}}
+.tarjeta{background:var(--superficie);border:1px solid var(--borde);border-radius:var(--radio-md);padding:.75rem;display:flex;flex-direction:column;gap:.4rem}
+.poster{aspect-ratio:2/3;border-radius:var(--radio-sm);background:var(--borde);display:grid;place-items:center;color:var(--texto-suave);font-size:.85rem}
+.vacio{border:1px dashed var(--borde);border-radius:var(--radio-md);padding:1.5rem;text-align:center;color:var(--texto-suave)}
+/* Layout de ejemplo */
+.pantalla{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:992px){.pantalla{grid-template-columns:4fr 8fr}}
+.caja{border:1px dashed var(--borde-control);border-radius:var(--radio-md);padding:1rem;color:var(--texto-suave);font-size:.9rem}
+ul.reglas{margin:.25rem 0;padding-left:1.2rem}
+ul.reglas li{margin:.2rem 0}
+</style>
+</head>
+<body>
+<main>
+<h1>GoldenMovies · Cartelera dorada</h1>
+<p class="suave">Brand board del sistema de diseño, versión 1.0 (noviembre 2026). Es la versión visual de <code>DESIGN.md</code>; si algo no coincide, manda el archivo. Los textos de las muestras son ilustrativos: los textos reales los define la spec.</p>
+<p class="suave">Las muestras reproducen con los tokens el aspecto de los componentes de Bootstrap 5.3 en su tema oscuro. Esta página no carga Bootstrap.</p>
+
+<h2>Color</h2>
+<div class="grid g-colores">
+  <div class="muestra"><div class="color" style="background:var(--fondo)"></div><div class="info"><code>--fondo</code><small>#0f1117 · fondo de página y de campos</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--superficie)"></div><div class="info"><code>--superficie</code><small>#1a1d27 · paneles y tarjetas</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--borde)"></div><div class="info"><code>--borde</code><small>#2a2e3b · separadores (decorativo)</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--borde-control)"></div><div class="info"><code>--borde-control</code><small>#6b7280 · bordes de controles · nuevo</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--texto)"></div><div class="info"><code>--texto</code><small>#e8e9ed · texto principal</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--texto-suave)"></div><div class="info"><code>--texto-suave</code><small>#9aa0b0 · texto secundario</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--acento)"></div><div class="info"><code>--acento</code><small>#f5b301 · botón primario, foco, enlaces</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--sobre-acento)"></div><div class="info"><code>--sobre-acento</code><small>#111111 · texto sobre el acento · nuevo</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--peligro)"></div><div class="info"><code>--peligro</code><small>#e5484d · bordes y rellenos de error</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--peligro-texto)"></div><div class="info"><code>--peligro-texto</code><small>#ff6b6b · texto de error · nuevo</small></div></div>
+  <div class="muestra"><div class="color" style="background:var(--exito)"></div><div class="info"><code>--exito</code><small>#46c37b · confirmaciones y «Cabe» · nuevo</small></div></div>
+</div>
+<p class="suave" style="margin-top:1rem">Dorado solo para lo que se puede hacer. Rojo y verde solo para estados. El color nunca informa solo: siempre va con texto.</p>
+<div class="panel table-scroll"><table>
+<tr><th>Combinación</th><th>Contraste</th><th>Nivel</th></tr>
+<tr><td><code>--texto</code> sobre <code>--superficie</code></td><td class="cifras">13,9:1</td><td>AAA</td></tr>
+<tr><td><code>--texto-suave</code> sobre <code>--superficie</code></td><td class="cifras">6,4:1</td><td>AA</td></tr>
+<tr><td><code>--acento</code> sobre <code>--superficie</code></td><td class="cifras">9,1:1</td><td>AAA</td></tr>
+<tr><td><code>--sobre-acento</code> sobre <code>--acento</code></td><td class="cifras">10,2:1</td><td>AAA</td></tr>
+<tr><td><code>--peligro-texto</code> sobre <code>--superficie</code></td><td class="cifras">6,1:1</td><td>AA</td></tr>
+<tr><td><code>--exito</code> sobre <code>--superficie</code></td><td class="cifras">7,5:1</td><td>AAA</td></tr>
+<tr><td><code>--borde-control</code> sobre <code>--fondo</code></td><td class="cifras">3,9:1</td><td>Controles (1.4.11)</td></tr>
+</table></div>
+
+<h2>Tipografía</h2>
+<div class="panel">
+  <p class="suave">Una sola familia: la del sistema, la misma que ya usa la app. No se cargan fuentes externas.</p>
+  <div style="font-size:1.8rem;font-weight:600">Título de pantalla · 1.8rem</div>
+  <div style="font-size:1.2rem;font-weight:600;color:var(--acento)">Título de sección · 1.2rem</div>
+  <div>Texto · 1rem. La duración de una película se lee en cifras tabulares: <span class="cifras">112 min · 98 min · 145 min</span></div>
+  <div style="font-size:.875rem;color:var(--texto-suave)">Texto pequeño · 0.875rem, para ayudas, motivos y mensajes de error</div>
+</div>
+
+<h2>Radios y espaciado</h2>
+<div class="grid g-2">
+  <div class="panel"><h3>Radios</h3><p><code>--radio-sm</code> 6 px: botones, campos, insignias.<br><code>--radio-md</code> 10 px: tarjetas y paneles.</p></div>
+  <div class="panel"><h3>Espaciado</h3><p>Sale de la escala de Bootstrap (<code>p-3</code>, <code>gap-2</code>, <code>g-3</code>, <code>mb-3</code>). No se escriben píxeles sueltos.</p></div>
+</div>
+
+<h2>Componentes</h2>
+<div class="grid g-2">
+  <div class="panel">
+    <h3>Botón</h3>
+    <p class="suave">Primario, secundario y quitar. Sin botón relleno en rojo.</p>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <button class="btn btn-primary" type="button">Primario</button>
+      <button class="btn btn-sec" type="button">Secundario</button>
+      <button class="btn btn-peligro" type="button">Quitar</button>
+      <button class="btn btn-primary" type="button" disabled>Enviando</button>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Campo de formulario</h3>
+    <label for="c1">Campo normal</label><input id="c1" class="campo" value="Ejemplo" readonly>
+    <label for="c2" style="margin-top:.75rem">Campo con foco</label><input id="c2" class="campo foco" value="Ejemplo" readonly>
+    <label for="c3" style="margin-top:.75rem">Campo con error</label><input id="c3" class="campo error" value="Ejemplo" aria-invalid="true" aria-describedby="e3" readonly>
+    <p id="e3" class="msg-error">El mensaje de error va debajo y lo escribe la spec.</p>
+  </div>
+  <div class="panel">
+    <h3>Insignia de estado</h3>
+    <p class="suave">Siempre con texto.</p>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap"><span class="badge b-cabe">Cabe</span><span class="badge b-nocabe">No cabe</span><span class="badge b-sin">Sin duración</span></div>
+  </div>
+  <div class="panel">
+    <h3>Barra de tiempo</h3>
+    <div class="progreso" role="progressbar" aria-label="Tiempo ocupado" aria-valuemin="0" aria-valuemax="180" aria-valuenow="132"><div style="width:73%"></div></div>
+    <p class="cifras" style="margin-top:.5rem">132 min ocupados de 180 · quedan 48 min</p>
+    <p class="suave" style="font-size:.875rem">Ocupado, pausas y restante, siempre visibles y en cifras.</p>
+  </div>
+  <div class="panel">
+    <h3>Avisos</h3>
+    <div class="aviso a-ok" role="status">Aviso de éxito</div>
+    <div class="aviso a-error" role="alert">Aviso de error</div>
+    <div class="aviso a-info" role="status">Aviso informativo</div>
+  </div>
+  <div class="panel">
+    <h3>Estados de la pantalla</h3>
+    <p><span class="spinner" role="status" aria-label="Cargando"></span> <span class="suave">Cargando</span></p>
+    <div class="vacio">Estado vacío</div>
+  </div>
+</div>
+
+<h2>Tarjeta de película</h2>
+<p class="suave">Póster, título, duración o «Sin duración», estado, motivo si no se puede agregar y el botón.</p>
+<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(190px,1fr))">
+  <div class="tarjeta"><div class="poster">Póster</div><strong>Título de ejemplo</strong><span class="cifras">112 min</span><span><span class="badge b-cabe">Cabe</span></span><button class="btn btn-primary" type="button">Agregar</button></div>
+  <div class="tarjeta"><div class="poster">Póster</div><strong>Título de ejemplo</strong><span class="cifras">178 min</span><span><span class="badge b-nocabe">No cabe</span></span><span class="suave" style="font-size:.875rem">Motivo escrito, lo define la spec.</span><button class="btn btn-sec" type="button" disabled>Agregar</button></div>
+  <div class="tarjeta"><div class="poster">Sin póster</div><strong>Título de ejemplo</strong><span><span class="badge b-sin">Sin duración</span></span><span class="suave" style="font-size:.875rem">Motivo escrito, lo define la spec.</span><button class="btn btn-sec" type="button" disabled>Agregar</button></div>
+</div>
+
+<h2>Layout de «Noche de película»</h2>
+<p class="suave">Desde 992 px, dos columnas (4 y 8). Debajo de eso, una sola columna en el mismo orden. Nunca hay scroll horizontal, ni a 390 px.</p>
+<div class="pantalla">
+  <div class="grid"><div class="caja">Panel del tiempo disponible</div><div class="caja">Panel de la sesión que se arma</div></div>
+  <div class="caja" style="min-height:160px">Películas que caben, en tarjetas</div>
+</div>
+
+<h2>Dos capas de estilo</h2>
+<div class="panel">
+  <p>El Proyecto 3 sigue con su CSS plano en <code>src/index.css</code> y no se toca. Lo nuevo de E2 usa Bootstrap 5.3 (solo CSS) con sus variables apuntadas a estos tokens en <code>src/styles/tema.css</code>. Orden de importación: Bootstrap, <code>index.css</code>, <code>tema.css</code>.</p>
+</div>
+
+<h2>Reglas para el agente</h2>
+<div class="grid g-2">
+  <div class="panel"><h3>Haz</h3><ul class="reglas">
+    <li>Usa solo tokens.</li><li>Usa clases de Bootstrap en todo componente nuevo de E2.</li><li>Importa los límites del dominio, no los escribas a mano.</li><li>Conserva los textos de la spec.</li><li>Comprueba a 1280 px y a 390 px.</li></ul></div>
+  <div class="panel"><h3>No hagas</h3><ul class="reglas">
+    <li>Colores hexadecimales fuera de <code>index.css</code> y <code>tema.css</code>.</li><li><code>react-bootstrap</code>, iconos de librerías, Tailwind o el JavaScript de Bootstrap.</li><li>Bootstrap desde un CDN.</li><li>Estilos en línea, salvo el ancho de la barra de tiempo.</li><li>Clases de color de Bootstrap, sombras, gradientes.</li><li>Editar <code>index.css</code> ni pantallas del Proyecto 3.</li></ul></div>
+</div>
+
+<h2>Criterios verificables</h2>
+<p class="suave">D-01 a D-12 están en la sección 10 de <code>DESIGN.md</code>. La spec de interfaz los cita por su id y los convierte en criterios con DEBE y NO DEBE.</p>
+</main>
+</body>
+</html>
