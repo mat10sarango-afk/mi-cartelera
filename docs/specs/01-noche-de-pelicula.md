@@ -456,9 +456,9 @@ Si el editor no acepta el cambio de rol, la misma comprobación se hace desde la
 
 | Ticket | Crea | Modifica |
 |---|---|---|
-| T-01 · Bootstrap, tema y Vitest | `src/styles/tema.css` | `package.json`, `pnpm-lock.yaml`, `src/main.tsx`, `index.html` (solo el atributo `data-bs-theme`) |
-| T-02 · Reglas del tiempo y de la sesión | `src/types/noche.ts`, `src/dominio/sesion.ts`, `src/dominio/sesion.test.ts` | — |
-| T-03 · Candidatas, orden y nombre | `src/dominio/peliculas.ts`, `src/dominio/peliculas.test.ts`, `src/dominio/nombreSesion.ts`, `src/dominio/nombreSesion.test.ts` | `src/types/noche.ts` (si falta algún tipo) |
+| T-01 · Bootstrap, tema y Vitest | `src/styles/tema.css`, `src/dominio/entorno.test.ts` (prueba temporal) | `package.json`, `pnpm-lock.yaml`, `src/main.tsx`, `index.html` (solo el atributo `data-bs-theme`) |
+| T-02 · Reglas del tiempo y de la sesión | `src/types/noche.ts`, `src/dominio/sesion.ts`, `src/dominio/sesion.test.ts` | Borra `src/dominio/entorno.test.ts` |
+| T-03 · Candidatas, orden y nombre | `src/dominio/peliculas.ts`, `src/dominio/peliculas.test.ts`, `src/dominio/nombreSesion.ts`, `src/dominio/nombreSesion.test.ts` | `src/dominio/sesion.ts` (agrega `NOMBRE_MAXIMO`), `src/dominio/sesion.test.ts`, `src/types/noche.ts` (si falta algún tipo) |
 | T-04 · Migración y RLS | `supabase/migraciones/001_noche_de_pelicula.sql` | — |
 | T-05 · Servicios de lectura | `src/services/peliculasPorVerService.ts`, `src/services/duracionesService.ts` | — |
 | T-06 · Servicio de sesiones | `src/services/sesionesService.ts` | — |

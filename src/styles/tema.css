@@ -1,0 +1,278 @@
+/*
+ * tema.css · Cartelera dorada
+ * Se importa en src/main.tsx DESPUÉS de Bootstrap y de index.css (DESIGN.md §2).
+ * Los siete tokens de color originales siguen en src/index.css; aquí van los nuevos
+ * y la conexión de Bootstrap con todos los tokens. No se escribe ningún color fuera
+ * de este archivo y de index.css (criterio D-01).
+ */
+
+/* 1. Tokens nuevos (DESIGN.md §5.1 y §5.4) */
+:root {
+  --sobre-acento: #111111;
+  --peligro-texto: #ff6b6b;
+  --exito: #46c37b;
+  --borde-control: #6b7280;
+  --radio-sm: 6px;
+  --radio-md: 10px;
+  --fuente: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 2. Variables de Bootstrap apuntadas a los tokens (DESIGN.md §5.2).
+ *    Se declaran también en :root para que las pantallas del Proyecto 3 conserven su aspecto. */
+:root,
+[data-bs-theme='dark'] {
+  --bs-body-bg: var(--fondo);
+  --bs-body-bg-rgb: 15, 17, 23;
+  --bs-body-color: var(--texto);
+  --bs-body-color-rgb: 232, 233, 237;
+  --bs-secondary-color: var(--texto-suave);
+  --bs-border-color: var(--borde);
+  --bs-primary: var(--acento);
+  --bs-primary-rgb: 245, 179, 1;
+  --bs-link-color: var(--acento);
+  --bs-link-color-rgb: 245, 179, 1;
+  --bs-link-hover-color: var(--acento);
+  --bs-link-hover-color-rgb: 245, 179, 1;
+  --bs-danger: var(--peligro);
+  --bs-danger-rgb: 229, 72, 77;
+  --bs-success: var(--exito);
+  --bs-success-rgb: 70, 195, 123;
+  --bs-border-radius: var(--radio-sm);
+  --bs-border-radius-lg: var(--radio-md);
+  --bs-body-font-family: var(--fuente);
+  /* El Proyecto 3 usa el interlineado normal; la pantalla de E2 pone 1.5 en .noche-de-pelicula */
+  --bs-body-line-height: normal;
+}
+
+/* 3. Restaurar lo que el CSS base de Bootstrap cambia en el Proyecto 3 y index.css no fija (riesgo R-05) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  line-height: normal;
+}
+p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+img {
+  vertical-align: baseline;
+}
+ul,
+ol {
+  margin-top: 1em;
+  padding-left: 40px;
+}
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin-top: 0;
+}
+
+/* 4. Pantalla Noche de película */
+.noche-de-pelicula {
+  line-height: 1.5;
+}
+.noche-de-pelicula h1,
+.noche-de-pelicula h2,
+.noche-de-pelicula h3 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+.noche-de-pelicula .tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 5. Componentes de Bootstrap que usa E2 (DESIGN.md §7) */
+
+/* Panel y tarjeta */
+.card {
+  --bs-card-bg: var(--superficie);
+  --bs-card-color: var(--texto);
+  --bs-card-border-color: var(--borde);
+  --bs-card-border-radius: var(--radio-md);
+  --bs-card-inner-border-radius: var(--radio-md);
+}
+
+/* Campo de formulario */
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.form-control,
+.form-select {
+  min-height: 40px;
+  background-color: var(--fondo);
+  color: var(--texto);
+  border: 1px solid var(--borde-control);
+  border-radius: var(--radio-sm);
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--fondo);
+  color: var(--texto);
+  border-color: var(--acento);
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: var(--peligro);
+  background-image: none;
+  padding-right: 0.7rem;
+}
+.invalid-feedback {
+  display: block;
+  color: var(--peligro-texto);
+  font-size: 0.875rem;
+}
+.form-text {
+  color: var(--texto-suave);
+  font-size: 0.875rem;
+}
+
+/* Botón */
+.btn {
+  min-height: 40px;
+  font-weight: 600;
+  border-radius: var(--radio-sm);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+.btn-primary {
+  --bs-btn-color: var(--sobre-acento);
+  --bs-btn-bg: var(--acento);
+  --bs-btn-border-color: var(--acento);
+  --bs-btn-hover-color: var(--sobre-acento);
+  --bs-btn-hover-bg: var(--acento);
+  --bs-btn-hover-border-color: var(--acento);
+  --bs-btn-active-color: var(--sobre-acento);
+  --bs-btn-active-bg: var(--acento);
+  --bs-btn-active-border-color: var(--acento);
+  --bs-btn-disabled-color: var(--sobre-acento);
+  --bs-btn-disabled-bg: var(--acento);
+  --bs-btn-disabled-border-color: var(--acento);
+}
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+.btn-outline-secondary {
+  --bs-btn-color: var(--texto);
+  --bs-btn-border-color: var(--borde-control);
+  --bs-btn-hover-color: var(--texto);
+  --bs-btn-hover-bg: var(--borde);
+  --bs-btn-hover-border-color: var(--borde-control);
+  --bs-btn-active-color: var(--texto);
+  --bs-btn-active-bg: var(--borde);
+  --bs-btn-active-border-color: var(--borde-control);
+  --bs-btn-disabled-color: var(--texto-suave);
+  --bs-btn-disabled-border-color: var(--borde);
+}
+.btn-outline-danger {
+  --bs-btn-color: var(--peligro-texto);
+  --bs-btn-border-color: var(--peligro);
+  --bs-btn-hover-color: var(--peligro-texto);
+  --bs-btn-hover-bg: var(--borde);
+  --bs-btn-hover-border-color: var(--peligro);
+  --bs-btn-active-color: var(--peligro-texto);
+  --bs-btn-active-bg: var(--borde);
+  --bs-btn-active-border-color: var(--peligro);
+  --bs-btn-disabled-color: var(--texto-suave);
+  --bs-btn-disabled-border-color: var(--borde);
+}
+
+/* Insignias de estado: siempre llevan texto */
+.badge {
+  background-color: var(--superficie);
+  border: 1px solid;
+  border-radius: var(--radio-sm);
+  font-weight: 600;
+}
+.insignia-cabe {
+  color: var(--exito);
+  border-color: var(--exito);
+}
+.insignia-no-cabe {
+  color: var(--peligro-texto);
+  border-color: var(--peligro);
+}
+.insignia-sin-duracion {
+  color: var(--texto-suave);
+  border-color: var(--borde-control);
+}
+
+/* Barra de tiempo */
+.progress {
+  --bs-progress-height: 8px;
+  --bs-progress-bg: var(--fondo);
+  --bs-progress-bar-bg: var(--acento);
+  --bs-progress-border-radius: var(--radio-sm);
+  border: 1px solid var(--borde);
+}
+
+/* Avisos */
+.alert {
+  --bs-alert-color: var(--texto);
+  --bs-alert-bg: var(--superficie);
+  --bs-alert-border-radius: var(--radio-sm);
+}
+.alert-success {
+  --bs-alert-border-color: var(--exito);
+}
+.alert-danger {
+  --bs-alert-border-color: var(--peligro);
+}
+.alert-secondary {
+  --bs-alert-border-color: var(--borde-control);
+}
+
+/* Carga */
+.spinner-border {
+  color: var(--acento);
+}
+
+/* Tarjeta de película */
+.poster-pelicula {
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--radio-sm);
+  background-color: var(--borde);
+}
+.sin-poster {
+  display: grid;
+  place-items: center;
+  color: var(--texto-suave);
+  font-size: 0.875rem;
+}
+
+/* Estado vacío */
+.estado-vacio {
+  border: 1px dashed var(--borde);
+  border-radius: var(--radio-md);
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+/* Sin animaciones decorativas (DESIGN.md §5.5): el spinner queda porque comunica un estado */
+@media (prefers-reduced-motion: reduce) {
+  .noche-de-pelicula *,
+  .noche-de-pelicula *::before,
+  .noche-de-pelicula *::after {
+    transition: none !important;
+  }
+}
+
+/* 6. index.css pinta de rojo todo [role='alert']; en los avisos de Bootstrap el texto va con --texto */
+.alert {
+  color: var(--bs-alert-color);
+}

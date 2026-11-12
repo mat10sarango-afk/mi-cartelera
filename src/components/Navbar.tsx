@@ -10,6 +10,7 @@ export default function Navbar() {
         <strong>🎬 GoldenMovies</strong>
         <NavLink to="/">Buscar</NavLink>
         <NavLink to="/mi-lista">Mi lista</NavLink>
+        <NavLink to="/noche">Noche de película</NavLink>
       </nav>
       <div>
         <span>{user?.email} </span>
